@@ -76,6 +76,10 @@ def get_spotify_info(artist, music):
 def index():
     return render_template('index.html')
 
+@app.route('/result')
+def result():
+    return render_template('result.html')
+
 @app.route('/generate-response', methods=['POST'])
 def generate_response():
     try:
@@ -91,18 +95,19 @@ def generate_response():
             return jsonify({"error": "Livro não encontrado ou sem descrição."}), 404
 
         prompt = f"""
-                    Crie uma playlist de 5 músicas que combinem com o seguinte livro: {book_description}
+                Crie uma playlist de 5 músicas que combinem com o seguinte livro: {book_description}
 
-                    A resposta deve ser no formato JSON, onde cada música será representada por um objeto com os seguintes campos:
+                A resposta deve ser no formato JSON, onde cada música será representada por um objeto com os seguintes campos:
 
-                    - 'music': Nome da música
-                    - 'artist': Nome do artista
-                    - 'description': Descrição do motivo de ter escolhido essa música para o livro.
+                - 'music': Nome da música
+                - 'artist': Nome do artista
+                - 'description': Descrição do motivo de ter escolhido essa música para o livro.
+                - 'keyword': Uma palavra descritiva que capture a essência da relação entre a música e o livro. Escolha entre: 'emocionante', 'sombrio', 'nostálgico', 'misterioso', 'aventureiro'.
 
-                    Escolha músicas que têm maior probabilidade de estarem disponível no Spotify.
+                Escolha músicas que têm maior probabilidade de estarem disponíveis no Spotify.
 
-                    Certifique-se de responder sempre em português, mas pode incluir músicas internacionais. E de incluir essas chaves exatamente como indicadas no formato JSON.
-                    """
+                Certifique-se de responder sempre em português, mas pode incluir músicas internacionais. E de incluir essas chaves exatamente como indicadas no formato JSON.
+            """
         
         # Gerar o conteúdo com base no prompt
         chat = model.generate_content(prompt, generation_config=genai.GenerationConfig(response_mime_type='application/json'))
