@@ -95,19 +95,18 @@ def generate_response():
             return jsonify({"error": "Livro não encontrado ou sem descrição."}), 404
 
         prompt = f"""
-                Crie uma playlist de 5 músicas que combinem com o seguinte livro: {book_description}
+                    Crie uma playlist de 6 músicas que combinem com o seguinte livro: {book_description}
 
-                A resposta deve ser no formato JSON, onde cada música será representada por um objeto com os seguintes campos:
+                    A resposta deve ser no formato JSON, onde cada música será representada por um objeto com os seguintes campos:
 
-                - 'music': Nome da música
-                - 'artist': Nome do artista
-                - 'description': Descrição do motivo de ter escolhido essa música para o livro.
-                - 'keyword': Uma palavra descritiva que capture a essência da relação entre a música e o livro. Escolha entre: 'emocionante', 'sombrio', 'nostálgico', 'misterioso', 'aventureiro'.
+                    - 'music': Nome da música
+                    - 'artist': Nome do artista
+                    - 'keyword': Uma palavra descritiva que capture a essência da relação entre a música e o livro. Escolha entre: 'Feliz', 'Triste', 'Amor', 'Raiva', 'Calma', 'Energética'.
+                    - 'description': Descrição detalhada do motivo de ter escolhido essa música para o livro, explicando como ela reflete a emoção representada pela palavra-chave e sua relação com a trama ou os personagens.
 
-                Escolha músicas que têm maior probabilidade de estarem disponíveis no Spotify.
+                    Escolha uma música para cada emoção na ordem apresentada, garantindo variedade e relevância para o livro, caso o livro não passe está emoção, faça alguma consideração sobre algo que se pode adicionar ao livro, como fanfic. Inclua músicas que têm maior probabilidade de estar disponíveis no Spotify. Certifique-se de responder sempre em português, mas pode incluir músicas internacionais. Inclua essas chaves exatamente como indicadas no formato JSON.
 
-                Certifique-se de responder sempre em português, mas pode incluir músicas internacionais. E de incluir essas chaves exatamente como indicadas no formato JSON.
-            """
+                    """
         
         # Gerar o conteúdo com base no prompt
         chat = model.generate_content(prompt, generation_config=genai.GenerationConfig(response_mime_type='application/json'))
@@ -150,4 +149,4 @@ def generate_response():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)

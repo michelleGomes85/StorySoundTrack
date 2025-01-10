@@ -218,6 +218,12 @@ textarea.materialize-textarea {
     }
 }
 
+.content-result {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
 @media screen and (max-width: 992px) {
     .nav-center {
         display: none;
