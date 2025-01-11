@@ -30,6 +30,9 @@ def generate_response():
             return jsonify({"error": ERROR_MESSAGES["BOOK_NOT_FOUND"]}), 404
 
         sentiment_scores = parse_json_response(analyze_sentiment(book_description))
+
+        print(sentiment_scores)
+        
         playlist = parse_json_response(generate_playlist(book_description))
 
         for item in playlist['playlist']:

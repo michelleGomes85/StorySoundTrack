@@ -6,11 +6,16 @@ def configure_model():
     return genai.GenerativeModel(model_name="gemini-1.5-flash")
 
 def analyze_sentiment(book_description):
+
+    prompt = SENTIMENT_PROMPT.format(book_description=book_description)
+
     model = configure_model()
+
     sentiment_response = model.generate_content(
-        SENTIMENT_PROMPT.format(book_description=book_description),
-        generation_config=genai.GenerationConfig(response_mime_type='application/json')
-    )
+                        prompt,
+                        generation_config=genai.GenerationConfig(response_mime_type='application/json')
+                    )
+
     return sentiment_response.candidates[0].content.parts[0].text
 
 def generate_playlist(book_description):

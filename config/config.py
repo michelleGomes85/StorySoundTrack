@@ -13,14 +13,13 @@ SPOTIPY_CLIENT_SECRET = os.getenv("SPOTIPY_CLIENT_SECRET")
 # Constantes para prompts
 SENTIMENT_PROMPT = """
 Analise o seguinte texto e avalie a intensidade de cada um dos seguintes sentimentos, atribuindo uma pontuação de 0 a 10, onde 0 significa "ausente" e 10 significa "extremamente presente". Forneça o resultado em formato JSON com as chaves e valores correspondentes aos seguintes sentimentos:
-{{
+    
     "Amor": 0,
     "Calma": 0,
     "Energética": 0,
     "Feliz": 0,
     "Raiva": 0,
     "Triste": 0
-}}
 
 Certifique-se de considerar tanto o tom geral do texto quanto a relação emocional subjacente entre os personagens, eventos e atmosfera do livro.
 
