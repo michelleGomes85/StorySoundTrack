@@ -8,9 +8,7 @@ body {
 
 .container-app {
     margin: 0 auto;
-    padding: 20px;
     height: auto;
-    padding: 0 100px 200px;
     align-items: center;
 }
 
@@ -90,7 +88,7 @@ body {
 
 .playlist-section h2 {
     color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     font-size: 2rem;
     font-weight: bold;
 }

@@ -69,4 +69,10 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('playlist', JSON.stringify(responseData.playlist));
         localStorage.setItem('sentimentScores', JSON.stringify(responseData.book.sentiment_scores));
     }
+
+    document.getElementById('book-title').addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            document.getElementById('searchBtn').click();
+        }
+    });
 });
