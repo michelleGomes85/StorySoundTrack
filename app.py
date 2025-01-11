@@ -9,25 +9,61 @@ import json
 
 load_dotenv()
 
+# Constantes para chaves de API
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 GOOGLE_BOOKS_API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")
 SPOTIPY_CLIENT_ID = os.getenv("SPOTIPY_CLIENT_ID")
 SPOTIPY_CLIENT_SECRET = os.getenv("SPOTIPY_CLIENT_SECRET")
+
+# Constantes para prompts
+SENTIMENT_PROMPT = """
+Analise o seguinte texto e avalie a intensidade de cada um dos seguintes sentimentos, atribuindo uma pontuação de 0 a 10, onde 0 significa "ausente" e 10 significa "extremamente presente". Forneça o resultado em formato JSON com as chaves e valores correspondentes aos seguintes sentimentos:
+{{
+    "Amor": 0,
+    "Calma": 0,
+    "Energética": 0,
+    "Feliz": 0,
+    "Raiva": 0,
+    "Triste": 0
+}}
+
+Certifique-se de considerar tanto o tom geral do texto quanto a relação emocional subjacente entre os personagens, eventos e atmosfera do livro.
+
+Texto: {book_description}
+"""
+
+PLAYLIST_PROMPT = """
+Com base no texto e na análise dos sentimentos, crie uma playlist de 6 músicas que se relacionem profundamente com o livro descrito. Cada música deve refletir uma emoção principal específica, conforme os sentimentos analisados: Amor, Calma, Energética, Feliz, Raiva, e Triste,
+pode usar seu proprio conhecimento para ver se a música se encaixa no estilo de livro.
+
+A resposta deve ser no formato JSON, onde cada música será representada por um objeto com os seguintes campos:
+
+    - 'music': Nome da música
+    - 'artist': Nome do artista
+    - 'keyword': Uma palavra descritiva que capture a essência da relação entre a música e o livro. Escolha entre: 'Amor', 'Calma', 'Energética', 'Feliz', 'Raiva', 'Triste'.
+    - 'description': Descrição detalhada do motivo de ter escolhido essa música para o livro, explicando como ela reflete a emoção representada pela palavra-chave e sua relação com a trama ou os personagens.
+
+Regras:
+1. Selecione músicas que tenham maior probabilidade de estar disponíveis no Spotify.
+2. Escolha músicas que complementem o tom do livro, a jornada emocional dos personagens ou a atmosfera geral da narrativa.
+3. Explique de forma clara e convincente a relação entre a música e o sentimento escolhido, destacando trechos específicos do texto, se aplicável.
+4. Inclua músicas internacionais e nacionais que sejam amplamente reconhecidas e relevantes ao contexto do livro.
+
+Texto: {book_description}
+"""
 
 app = Flask(__name__)
 
 # Função para configurar a API do Google Generative AI
 def configure_model():
     genai.configure(api_key=GOOGLE_API_KEY)
-    model = genai.GenerativeModel(model_name="gemini-1.5-flash")
-    return model
+    return genai.GenerativeModel(model_name="gemini-1.5-flash")
 
 def configure_spotify():
-    sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, 
-                                                               client_secret=SPOTIPY_CLIENT_SECRET))
-    return sp
+    return spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, 
+                                                                 client_secret=SPOTIPY_CLIENT_SECRET))
 
-# Inicializar o modelo uma vez, para reutilizar
+# Inicializar o modelo e o cliente do Spotify uma vez, para reutilizar
 model = configure_model()
 spotify_client = configure_spotify()
 
@@ -56,56 +92,31 @@ def get_book_description(book_title):
 
     return "Descrição não disponível para os livros encontrados.", book_image_url
 
-# Função para buscar a prévia, URL da faixa e imagem do álbum no Spotify
+# Função para buscar a URL da faixa e imagem do álbum no Spotify
 def get_spotify_info(artist, music):
     query = f"{artist} {music}"
-    results = spotify_client.search(query, limit=3, type='track', market='BR')  # Aumentei o limite para 3 para capturar mais resultados
+    results = spotify_client.search(query, limit=1, type='track', market='BR')
     
     if results['tracks']['items']:
         track = results['tracks']['items'][0]
-        
-        preview_url = track.get('preview_url', None)
         track_url = track['external_urls']['spotify']
         album_image_url = track['album']['images'][0]['url']
-
-        return preview_url, track_url, album_image_url
-    return None, None, None
-
-# Função para analisar o livro com o Gemini
-def analyze_book(book_description):
-    # Análise de sentimentos
-    sentiment_prompt = f"Analise o seguinte texto e identifique os sentimentos predominantes: {book_description}"
-    sentiment_response = model.generate_content(sentiment_prompt)
-    sentimentos = sentiment_response.candidates[0].content.parts[0].text
-
-    # Análise de temas
-    theme_prompt = f"Analise o seguinte texto e identifique os temas principais: {book_description}"
-    theme_response = model.generate_content(theme_prompt)
-    temas = theme_response.candidates[0].content.parts[0].text
-
-    # Análise de personagens
-    character_prompt = f"Analise o seguinte texto e identifique os personagens principais e suas características: {book_description}"
-    character_response = model.generate_content(character_prompt)
-    personagens = character_response.candidates[0].content.parts[0].text
-
-    # Análise de estrutura narrativa
-    structure_prompt = f"Analise o seguinte texto e identifique a estrutura narrativa, incluindo clímax e desfecho: {book_description}"
-    structure_response = model.generate_content(structure_prompt)
-    estrutura_narrativa = structure_response.candidates[0].content.parts[0].text
-
-    return sentimentos, temas, personagens, estrutura_narrativa
+        return track_url, album_image_url
+    return None, None
 
 # Rota para a página principal
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# Rota para a página de resultados
 @app.route('/result')
 def result():
     return render_template('result.html')
 
 @app.route('/generate-response', methods=['POST'])
 def generate_response():
+
     try:
         data = request.json
         book_title = data.get('book_title')
@@ -118,49 +129,28 @@ def generate_response():
         if not book_description:
             return jsonify({"error": "Livro não encontrado ou sem descrição."}), 404
 
-        # Pedir ao Gemini uma análise quantitativa dos sentimentos
-        sentiment_prompt = f"""
-        Analise o seguinte texto e atribua uma pontuação de 0 a 10 para cada um dos seguintes sentimentos: Feliz, Triste, Amor, Raiva, Calma, Energética.
-        Retorne a resposta em formato JSON, com as chaves exatamente como abaixo:
-        {{
-            "Amor": 0,
-            "Calma": 0,
-            "Energética": 0
-            "Feliz": 0,
-            "Raiva": 0,
-            "Triste": 0,
-        }}
-        Texto: {book_description}
-        """
-        sentiment_response = model.generate_content(sentiment_prompt, generation_config=genai.GenerationConfig(response_mime_type='application/json'))
+        sentiment_response = model.generate_content(
+            SENTIMENT_PROMPT.format(book_description=book_description),
+            generation_config=genai.GenerationConfig(response_mime_type='application/json')
+        )
+
         sentiment_scores = json.loads(sentiment_response.candidates[0].content.parts[0].text)
 
-        # Gerar a playlist
-        prompt = f"""
-                    Crie uma playlist de 6 músicas que combinem com o seguinte livro: {book_description}
+        playlist_response = model.generate_content(
+            PLAYLIST_PROMPT.format(book_description=book_description),
+            generation_config=genai.GenerationConfig(response_mime_type='application/json')
+        )
 
-                    A resposta deve ser no formato JSON, onde cada música será representada por um objeto com os seguintes campos:
-
-                    - 'music': Nome da música
-                    - 'artist': Nome do artista
-                    - 'keyword': Uma palavra descritiva que capture a essência da relação entre a música e o livro. Escolha entre: 'Amor', 'Calma', 'Energética', 'Feliz', 'Raiva', 'Triste'.
-                    - 'description': Descrição detalhada do motivo de ter escolhido essa música para o livro, explicando como ela reflete a emoção representada pela palavra-chave e sua relação com a trama ou os personagens.
-
-                    Escolha uma música para cada emoção na ordem apresentada, garantindo variedade e relevância para o livro, coloque na ordem apresentada em palavras. Inclua músicas que têm maior probabilidade de estar disponíveis no Spotify. Certifique-se de responder sempre em português, mas pode incluir músicas internacionais. Inclua essas chaves exatamente como indicadas no formato JSON.
-                    """
-        chat = model.generate_content(prompt, generation_config=genai.GenerationConfig(response_mime_type='application/json'))
-        response_content = chat.candidates[0].content.parts[0].text
+        response_content = playlist_response.candidates[0].content.parts[0].text
         playlist = json.loads(response_content)
 
-        # Adicionar informações do Spotify (sem preview_url)
         for item in playlist['playlist']:
             artist = item["artist"]
             music = item["music"]
-            _, track_url, album_image_url = get_spotify_info(artist, music)
+            track_url, album_image_url = get_spotify_info(artist, music)
             item["track_url"] = track_url if track_url else "#"
             item["album_image_url"] = album_image_url if album_image_url else ""
 
-        # Retornar os dados para o frontend
         response_json = {
             "book": {
                 "title": book_title,
@@ -168,11 +158,8 @@ def generate_response():
                 "image_url": book_image_url,
                 "sentiment_scores": sentiment_scores  
             },
-            "playlist": playlist
+            "playlist": playlist["playlist"]
         }
-        
-        print("Resultado da playlist gerada:")
-        print(json.dumps(response_json, indent=2))
         
         return jsonify(response_json)
 

@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book to Playlist</title>
 
-    <link rel="stylesheet" href="/static/css/styles.css" />
-
     <!-- Importando Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet"/>
     
@@ -14,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
     <link rel="shortcut icon" href="/static/images/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/styles.css" />
 </head>
 <body>
 
@@ -81,9 +80,17 @@
         <img src="/static/images/image_home.png" alt="Imagem de fundo" class="footer-image">
     </div>
 
-    <!-- Scripts do Materialize -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <div id="modal-id" class="modal-error">
+        <div id="icon"></div>
+        <div class="description" id="error-message"></div> <!-- Elemento de erro -->
+        <button class="fechar" onclick="closeModal()">Fechar</button>
+    </div>
+    
+    <div id="overlay"></div>
 
     <script src="/static/js/script_index.js"></script>
+
+    <!-- Scripts do Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

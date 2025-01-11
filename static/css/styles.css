@@ -218,10 +218,49 @@ textarea.materialize-textarea {
     }
 }
 
-.content-result {
-    margin: 20px auto;
-    max-width: 1200px;
+.modal-error {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.modal-error .description {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.modal-error .fechar {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal-error .fechar:hover {
+    background-color: #ff1a1a;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 @media screen and (max-width: 992px) {

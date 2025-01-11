@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
          var swiper = new Swiper('.swiper-container', {
 
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 50,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -114,20 +114,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 label: 'Intensidade dos Sentimentos',
                 data: Object.values(sentimentScores),
                 backgroundColor: [
-                    'rgba(255, 205, 86, 0.7)', 
-                    'rgba(54, 54, 54, 0.7)',    
-                    'rgba(255, 99, 132, 0.7)',  
-                    'rgba(255, 69, 0, 0.7)',    
-                    'rgba(75, 192, 192, 0.7)',  
-                    'rgba(255, 159, 64, 0.7)'  
+                    'rgba(255, 99, 132, 0.5)',  // Amor (vermelho suave)
+                    'rgba(75, 192, 192, 0.5)',  // Calma (turquesa)
+                    'rgba(255, 205, 86, 0.5)',  // Energética (amarelo)
+                    'rgba(255, 159, 64, 0.5)',  // Feliz (laranja)
+                    'rgba(255, 69, 0, 0.5)',    // Raiva (vermelho intenso)
+                    'rgba(54, 54, 54, 0.5)'     // Triste (cinza) 
                 ],
                 borderColor: [
-                    'rgba(255, 205, 86, 1)',   
-                    'rgba(54, 54, 54, 1)',     
-                    'rgba(255, 99, 132, 1)',   
-                    'rgba(255, 69, 0, 1)',     
-                    'rgba(75, 192, 192, 1)',   
-                    'rgba(255, 159, 64, 1)'    
+                    'rgba(255, 99, 132, 1)',  // Amor
+                    'rgba(75, 192, 192, 1)',  // Calma
+                    'rgba(255, 205, 86, 1)',  // Energética
+                    'rgba(255, 159, 64, 1)',  // Feliz
+                    'rgba(255, 69, 0, 1)',    // Raiva
+                    'rgba(54, 54, 54, 1)'     // Triste  
                 ],
                 borderWidth: 1
             }]
@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });    
-
 })
     
 // Função para abrir o modal
