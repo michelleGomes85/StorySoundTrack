@@ -84,6 +84,26 @@ python app.py
 
   - Uma playlist de 6 músicas, cada uma com um link para o Spotify.
 
+## 🖼️ Exemplos de Uso
+
+### Página Inicial
+
+![Home page](assets/home_page.png)
+
+### Página Resposta
+
+**Descrição Livro**
+
+![Descrição Livro](assets/book_description.png)
+
+**Playlist**
+
+![Playlist](assets/playlist.png)
+
+**Analise de Sentimentos**
+
+![Analise](assets/analise.png)
+
 ## 🔑 Onde Obter as APIs
 
 ### Google Books API
