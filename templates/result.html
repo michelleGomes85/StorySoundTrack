@@ -6,18 +6,10 @@
     <title>Book to Playlist</title>
 
     <link rel="stylesheet" href="/static/css/styles.css" />
-
-    <!-- Importando Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet"/>
-    
-    <!-- Ícones do Materialize -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-
-
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
-    <link rel="stylesheet" href="/static/css/styles_result.css">
-
+    <link rel="stylesheet" href="/static/css/styles_result.css" />
     <link rel="shortcut icon" href="/static/images/fav.png" type="image/x-icon">
 </head>
 <body>
@@ -27,14 +19,10 @@
         <!-- Header com logo e links -->
         <nav>
             <div class="nav-wrapper">
-
-                <!-- Logo no lado esquerdo -->
                 <a href="/" class="brand-logo">
                     <img src="/static/images/logo.png" alt="">
                     <p>StorySoundTrack</p>
                 </a>
-
-                <!-- Links no centro (desktop) -->
                 <div class="nav-center">
                     <ul>
                         <li><a href="/"><i class="material-icons">home</i>Home</a></li>
@@ -42,8 +30,6 @@
                         <li><a href="#contato"><i class="material-icons">email</i>Contato</a></li>
                     </ul>
                 </div>
-
-                <!-- Ícone de menu para dispositivos móveis -->
                 <a href="#" data-target="mobile-nav" class="sidenav-trigger">
                     <i class="material-icons">menu</i>
                 </a>
@@ -57,77 +43,76 @@
             <li><a href="#contato"><i class="material-icons">email</i>Contato</a></li>
         </ul>
 
-        <div class="content-result">
-
-            <div class="playlist" id="playlist-container">
-                
-                <div class="swiper-container">
-                    
-                    <div class="swiper-wrapper"></div>
-                    
-                    <!-- Adiciona setas de navegação -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+        <div class="result_section">
+            <!-- Seção de Informações do Livro -->
+            <div class="book-info-section">
+                <!-- Poster do Livro -->
+                <div class="poster">
+                    <img id="bookImage" src="" alt="Capa do Livro">
                 </div>
-            
+
+                <!-- Descrição do Livro -->
+                <div class="description">
+                    <h4 id="bookTitle"></h4>
+                    <p id="bookDescription"></p>
+                    <button onclick="openModalDescription()">Ver mais</button>
+                </div>
             </div>
-        </div><!--content-result-->        
+
+            <!-- Playlist de Músicas -->
+            <div class="playlist-section">
+                <h2>Playlist Recomendada</h2>
+                <div class="playlist" id="playlist-container">
+                    <!-- Botões de navegação acima do carrossel -->
+                    <div class="swiper-navigation-top">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+
+                    <!-- Carrossel de músicas -->
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico de Sentimentos -->
+            <div class="sentiment-section">
+                <h2>Análise de Sentimentos</h2>
+                <div class="card">
+                    <div class="card-content">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--result_section-->
     </div>
 
     <!-- Modal -->
     <div id="modal" class="modal">
-        <div class="emoji" id="modal-emoji"></div>
+        <div id="modal-emoji"></div>
         <div class="descricao" id="modal-descricao"></div>
-        <button class="fechar" onclick="fecharModal()">Fechar</button>
+        <button class="fechar" onclick="closeModal()">Fechar</button>
     </div>
 
+    <!-- Modal para a descrição completa -->
+    <div id="modal_description" class="modal">
+    
+        <div class="modal-content">
+            <h4 id="modal-title"></h4>
+            <p id="modal-complete-description"></p>
+        </div>
+        <button class="fechar" onclick="closeModalDescription()">Fechar</button>
+    </div>
+    
     <!-- Fundo desfocado quando o modal está aberto -->
     <div id="modal-backdrop" class="modal-backdrop"></div>
 
     <!-- Scripts do Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <!--Swiper.js-->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/js/script_result.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const elems = document.querySelectorAll('.sidenav');
-            M.Sidenav.init(elems);
-        });
-
-        // Função para abrir o modal
-        function abrirModal(emoji, descricao) {
-            const modal = document.getElementById('modal');
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            const modalEmoji = document.getElementById('modal-emoji');
-            const modalDescricao = document.getElementById('modal-descricao');
-
-            modalEmoji.textContent = emoji;
-            modalDescricao.textContent = descricao;
-            modal.style.display = 'block';
-            modalBackdrop.style.display = 'block'; // Exibe o fundo desfocado
-        }
-
-        // Função para fechar o modal
-        function fecharModal() {
-            const modal = document.getElementById('modal');
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            modal.style.display = 'none';
-            modalBackdrop.style.display = 'none'; // Oculta o fundo desfocado
-        }
-
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 3, // Mostra 3 slides por vez
-            spaceBetween: 30,
-            navigation: {
-                nextEl: '.swiper-button-next', 
-                prevEl: '.swiper-button-prev', 
-            },
-            loop: false, 
-        });
-    </script>
 </body>
 </html>

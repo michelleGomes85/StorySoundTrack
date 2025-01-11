@@ -43,8 +43,10 @@ document.getElementById('searchBtn').onclick = async function(event) {
 };
 
 function localStorageDatas(responseData) {
-    localStorage.setItem('bookDescription', responseData.book_description);
-    localStorage.setItem('bookImageUrl', responseData.book_image_url);
+    localStorage.setItem('bookTitle', responseData.book.title);
+    localStorage.setItem('bookDescription', responseData.book.description);
+    localStorage.setItem('bookImageUrl', responseData.book.image_url);
     localStorage.setItem('playlist', JSON.stringify(responseData.playlist.playlist));
+    localStorage.setItem('sentimentScores', JSON.stringify(responseData.book.sentiment_scores));
 }
 
