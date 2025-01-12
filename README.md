@@ -35,8 +35,8 @@ Bem-vindo ao **Book Sound Track**! Este projeto combina a magia dos livros com a
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/book-mood-playlist-generator.git
-cd book-mood-playlist-generator
+git clone https://github.com/michelleGomes85/StorySoundTrack.git
+cd StorySoundTrack
 ```
 
 2. Instale as dependências:
@@ -83,6 +83,26 @@ python app.py
   - Uma análise dos sentimentos predominantes.
 
   - Uma playlist de 6 músicas, cada uma com um link para o Spotify.
+
+## 🖼️ Exemplos de Uso
+
+### Página Inicial
+
+![Home page](assets/home_page.png)
+
+### Página Resposta
+
+**Descrição Livro**
+
+![Descrição Livro](assets/book_description.png)
+
+**Playlist**
+
+![Playlist](assets/playlist.png)
+
+**Analise de Sentimentos**
+
+![Analise](assets/analise.png)
 
 ## 🔑 Onde Obter as APIs
 
