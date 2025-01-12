@@ -35,8 +35,8 @@ Bem-vindo ao **Book Sound Track**! Este projeto combina a magia dos livros com a
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/book-mood-playlist-generator.git
-cd book-mood-playlist-generator
+git clone https://github.com/michelleGomes85/StorySoundTrack.git
+cd StorySoundTrack
 ```
 
 2. Instale as dependências:
