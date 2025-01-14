@@ -138,6 +138,7 @@ python app.py
 
  ```sh
 StorySoundTrack/
+├── assets
 ├── config/
 │   └── config.py
 ├── services/
@@ -147,7 +148,7 @@ StorySoundTrack/
 ├── static/
 │   ├── css/
 │   │   └── styles_result.css
-|   |   └── styles.css
+│   │   └── styles.css
 │   ├── js/
 │   │   └── script_index.js
 │   │   └── script_result.js
