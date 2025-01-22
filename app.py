@@ -28,7 +28,7 @@ def generate_response():
             return jsonify({"error": ERROR_MESSAGES["BOOK_TITLE_NOT_PROVIDED"]}), 400
 
         book_info = get_book_description(book_title, author_name)
-        if not book_info:
+        if book_info == None:
             return jsonify({"error": ERROR_MESSAGES["BOOK_NOT_FOUND"]}), 404
 
         book_info = json.loads(book_info)
