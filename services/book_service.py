@@ -4,7 +4,7 @@ from config.config import GOOGLE_BOOKS_API_KEY
 
 def get_book_description(book_title, author_name=None):
     try:
-        # Monta a query de busca com o título e o autor (se fornecido)
+        
         query = f"intitle:{book_title}"
         if author_name:
             query += f"+inauthor:{author_name}"
@@ -15,8 +15,8 @@ def get_book_description(book_title, author_name=None):
 
         books = response.json()
 
-        if 'items' not in books:
-            return json.dumps({"error": "Nenhum livro encontrado."}, ensure_ascii=False, indent=4)
+        if books['totalItems'] == 0:
+            return None
         
         book_info = {
             "title": None,
@@ -45,9 +45,9 @@ def get_book_description(book_title, author_name=None):
                 break
 
         if not all(book_info.values()):
-            return json.dumps({"error": "Não foi possível encontrar todos os dados necessários."}, ensure_ascii=False, indent=4)
+            return None
 
         return json.dumps(book_info, ensure_ascii=False, indent=4)
 
     except requests.exceptions.RequestException as e:
-        return json.dumps({"error": f"Erro ao buscar livro na API do Google Books: {str(e)}"}, ensure_ascii=False, indent=4)
+        return None
