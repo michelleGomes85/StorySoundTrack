@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book to Playlist</title>
+
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/static/css/styles_result.css" />
+    <link rel="shortcut icon" href="/static/images/fav.png" type="image/x-icon">
+
+    <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 10px 20px;
+      color: white;
+    }
+
+    .navbar-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .navbar-icons i {
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-icons i:hover {
+      color: #007BFF;
+    }
+
+    /* Card do Topo (Capa do Livro e Descrição) */
+    .top-card {
+      display: flex;
+      align-items: center;
+      background-color: #f0f8ff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+    }
+
+    .top-card img {
+      width: 200px;
+      height: 300px;
+      border-radius: 8px;
+      margin-right: 20px;
+      object-fit: cover;
+    }
+
+    .top-card p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* Cards Container */
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      flex: 1 1 calc(33.333% - 40px); /* 3 cards por linha em telas grandes */
+      max-width: 400px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #f0f8ff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-top {
+      height: 10px;
+      background-color: #ADD8E6; /* Cor padrão, será sobrescrita */
+    }
+
+    .card-image {
+      position: relative;
+      width: 100%;
+      height: 200px;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 16px;
+    }
+
+    .card-content h2 {
+      margin: 0 0 8px;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    .card-content p {
+      margin: 8px 0;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    .card-content p strong {
+      color: #000;
+    }
+
+    .card-action {
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px 16px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #ddd;
+    }
+
+    .play-button {
+      background-color: #007BFF;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.2em;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .play-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Ajustes para telas menores */
+    @media (max-width: 1024px) {
+      .card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards por linha em telas médias */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        flex: 1 1 100%; /* 1 card por linha em telas pequenas */
+      }
+
+      .top-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 10px;
+        padding: 15px;
+      }
+
+      .top-card img {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+    
+</head>
+<body>
+
+    <div class="container-app">
+
+        <!-- Header com logo e links -->
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">
+                    <img src="/static/images/logo.png" alt="">
+                    <p>StorySoundTrack</p>
+                </a>
+                <div class="nav-center">
+                    <ul>
+                        <li><a href="/"><i class="material-icons">home</i>Home</a></li>
+                        <li><a href="{{ url_for('index') }}#funcionalidades"><i class="material-icons">playlist_add</i>Funcionalidades</a></li>
+                        <li><a href="{{ url_for('index') }}#contato"><i class="material-icons">email</i>Contato</a></li>
+                    </ul>
+                </div>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Navegação para dispositivos móveis -->
+        <ul class="sidenav" id="mobile-nav">
+            <li><a href="/"><i class="material-icons">home</i>Home</a></li>
+            <li><a href="{{ url_for('index') }}#funcionalidades"><i class="material-icons">playlist_add</i>Funcionalidades</a></li>
+            <li><a href="{{ url_for('index') }}#contato"><i class="material-icons">email</i>Contato</a></li>
+        </ul>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-description">
+                <h1>
+                    Transforme <span>histórias</span><br>
+                    em <span>emoções</span> sonoras
+                </h1>
+                <p>
+                    Dê uma trilha sonora ao seu livro com StorySoundTrack
+                </p>
+                <div class="search-container">
+                    <input id="book-title" type="text" placeholder="Digite o título do livro - nome do autor">
+                    <button id="searchBtn">Encontrar Trilha</button>
+                </div>
+
+                <div id="loading">
+                    <i class="material-icons spin">autorenew</i>
+                    <p>Carregando...</p>
+                </div>
+
+                <div class="description">
+                    Descubra músicas que capturam os sentimentos do seu livro.
+                </div>
+            </div>
+            <img src="/static/images/image_home.png" alt="Imagem de fundo" class="footer-image">
+        </div>
+
+        <div class="result_section">
+            <!-- Card do Topo (Capa do Livro e Descrição) -->
+            <div class="top-card">
+                <img src="https://via.placeholder.com/300x400?text=Capa+do+Livro" alt="Capa do Livro">
+                <p>
+                "Orgulho e Preconceito" é um romance clássico escrito por Jane Austen, publicado em 1813. 
+                A história gira em torno de Elizabeth Bennet e Mr. Darcy, explorando temas como amor, 
+                preconceito, orgulho e classe social. A obra é uma crítica inteligente e bem-humorada 
+                da sociedade da época.
+                </p>
+            </div>
+
+            <!-- Cards Container -->
+            <div class="cards-container">
+                <!-- Card 1: Esperança -->
+                <div class="card">
+                <div class="card-top" style="background-color: #ADD8E6;"></div>
+                <div class="card-image">
+                    <img src="https://source.unsplash.com/random/400x200?hope" alt="Esperança">
+                </div>
+                <div class="card-content">
+                    <h2>Esperança</h2>
+                    <p><strong>A Sky Full of Stars</strong> - Coldplay</p>
+                    <p>
+                    Reflete a esperança de Elizabeth Bennet em encontrar um amor verdadeiro, mesmo diante das 
+                    pressões sociais e das primeiras impressões negativas de Darcy. A música captura a luminosidade 
+                    e o otimismo que a movem.
+                    </p>
+                </div>
+                <div class="card-action">
+                    <button class="play-button">▶</button>
+                </div>
+                </div>
+
+                <!-- Card 2: Orgulho -->
+                <div class="card">
+                <div class="card-top" style="background-color: #8B4513;"></div>
+                <div class="card-image">
+                    <img src="https://source.unsplash.com/random/400x200?pride" alt="Orgulho">
+                </div>
+                <div class="card-content">
+                    <h2>Orgulho</h2>
+                    <p><strong>Confident</strong> - Demi Lovato</p>
+                    <p>
+                    Representa o orgulho ferido de Darcy após a rejeição inicial de Elizabeth, bem como a própria 
+                    autoconfiança e determinação de Elizabeth em defender suas convicções, mesmo diante de figuras 
+                    de alta classe.
+                    </p>
+                </div>
+                <div class="card-action">
+                    <button class="play-button">▶</button>
+                </div>
+                </div>
+
+                <!-- Card 3: Preconceito -->
+                <div class="card">
+                <div class="card-top" style="background-color: #A9A9A9;"></div>
+                <div class="card-image">
+                    <img src="https://source.unsplash.com/random/400x200?prejudice" alt="Preconceito">
+                </div>
+                <div class="card-content">
+                    <h2>Preconceito</h2>
+                    <p><strong>Before You Go</strong> - Lewis Capaldi</p>
+                    <p>
+                    Ilustra o julgamento precipitado que Elizabeth faz de Darcy com base em fofocas e aparências, 
+                    e como esse preconceito a impede de ver sua verdadeira natureza. A música captura a dor e o 
+                    arrependimento que surgem ao perceber o erro.
+                    </p>
+                </div>
+                <div class="card-action">
+                    <button class="play-button">▶</button>
+                </div>
+                </div>
+
+                <!-- Card 4: Paixão -->
+                <div class="card">
+                <div class="card-top" style="background-color: #FF69B4;"></div>
+                <div class="card-image">
+                    <img src="https://source.unsplash.com/random/400x200?passion" alt="Paixão">
+                </div>
+                <div class="card-content">
+                    <h2>Paixão</h2>
+                    <p><strong>Rewrite The Stars</strong> - Zac Efron, Zendaya</p>
+                    <p>
+                    Evidencia a paixão crescente entre Elizabeth e Darcy, desafiando as barreiras sociais e os 
+                    obstáculos que separam suas famílias. A música representa o desejo de superar as dificuldades 
+                    e viver um amor proibido.
+                    </p>
+                </div>
+                <div class="card-action">
+                    <button class="play-button">▶</button>
+                </div>
+                </div>
+
+                <!-- Card 5: Humildade -->
+                <div class="card">
+                <div class="card-top" style="background-color: #F5F5DC;"></div>
+                <div class="card-image">
+                    <img src="https://source.unsplash.com/random/400x200?humility" alt="Humildade">
+                </div>
+                <div class="card-content">
+                    <h2>Humildade</h2>
+                    <p><strong>Apologize</strong> - OneRepublic</p>
+                    <p>
+                    Simboliza o momento em que Darcy reconhece seus erros e demonstra humildade ao pedir desculpas 
+                    a Elizabeth. A música captura a dor e o remorso de ter magoado alguém que ama.
+                    </p>
+                </div>
+                <div class="card-action">
+                    <button class="play-button">▶</button>
+                </div>
+                </div>
+
+                <!-- Card 6: Romance -->
+                <div class="card">
+                    <div class="card-top" style="background-color: #DC143C;"></div>
+                    <div class="card-image">
+                        <img src="https://source.unsplash.com/random/400x200?romance" alt="Romance">
+                    </div>
+                    <div class="card-content">
+                        <h2>Romance</h2>
+                        <p><strong>Perfect</strong> - Ed Sheeran</p>
+                        <p>
+                        Representa o amor idealizado e a felicidade encontrada por Elizabeth e Darcy após superarem 
+                        seus orgulhos e preconceitos. A música celebra a união de duas almas que se completam e 
+                        encontram a perfeição no amor.
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <button class="play-button">▶</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Scripts do Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/script_result.js"></script>
+</body>
+</html>

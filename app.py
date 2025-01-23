@@ -15,7 +15,7 @@ def index():
 
 @app.route('/result')
 def result():
-    return render_template('result.html')
+    return render_template('result_test.html')
 
 @app.route('/generate-response', methods=['POST'])
 def generate_response():

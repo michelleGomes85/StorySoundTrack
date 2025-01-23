@@ -81,7 +81,7 @@ nav .brand-logo img {
 .hero {
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 90vh;
     text-align: center;
     padding: 0 20px;
     position: relative;

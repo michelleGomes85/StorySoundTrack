@@ -41,7 +41,7 @@ Regras:
 1. Selecione músicas que tenham maior probabilidade de estar disponíveis no Spotify.
 2. Escolha músicas que complementem o tom do livro, a jornada emocional dos personagens ou a atmosfera geral da narrativa.
 3. Explique de forma clara e convincente a relação entre a música e o sentimento escolhido, destacando trechos específicos do texto, se aplicável.
-4. Inclua músicas internacionais e nacionais que sejam amplamente reconhecidas e relevantes ao contexto do livro.
+4. Inclua músicas internacionais e nacionais que sejam amplamente reconhecidas e relevantes ao contexto do livro, seja 
 
 Texto: {book_description}
 """
@@ -49,7 +49,7 @@ Texto: {book_description}
 # Mensagens de erro
 ERROR_MESSAGES = {
     "BOOK_TITLE_NOT_PROVIDED": "Título do livro não fornecido.",
-    "BOOK_NOT_FOUND": "Livro não encontrado ou sem descrição.",
+    "BOOK_NOT_FOUND": "Livro não encontrado.",
     "GENERIC_ERROR": "Ocorreu um erro inesperado. Por favor, tente novamente."
 }
 
