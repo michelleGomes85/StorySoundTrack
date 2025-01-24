@@ -88,7 +88,7 @@ nav .brand-logo img {
 }
 
 .hero-description {
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 .hero h1 {
@@ -386,11 +386,13 @@ textarea.materialize-textarea {
 
 /* Footer */
 .footer {
-    background: linear-gradient(to top, #020c14 0%, #000000 100%);
+    background: #020c14;
     color: white;
     padding: 100px 0 20px;
     text-align: center;
     font-size: 18px;
+    display: none;
+    overflow: hidden;
 }
 
 .footer a {

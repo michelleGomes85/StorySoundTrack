@@ -9,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/styles_result.css" />
     <link rel="shortcut icon" href="/static/images/fav.png" type="image/x-icon">
 </head>
@@ -59,7 +60,7 @@
 
                 <div id="loading">
                     <i class="material-icons spin">autorenew</i>
-                    <p>Carregando...</p>
+                    <p>Analisando ...</p>
                 </div>
 
                 <div class="description">
@@ -88,11 +89,55 @@
 
             <!-- Gráfico de Teia -->
             <div class="chart-container">
+                <h2>Analise das emoções</h2>
                 <canvas id="emotionChart"></canvas>
             </div>
         </div><!--result_section-->
 
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large">
+                <i class="large material-icons">live_help</i>
+            </a>
+            <ul>
+                <li>
+                    <a class="btn-floating red tooltipped" data-position="left" data-tooltip="Um Amor para Recordar - Nicholas Sparks">
+                        <img src="http://books.google.com/books/content?id=CD0EQdzpRv8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Um Amor para Recordar - Nicholas Sparks" class="circle responsive-img">
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="Harry Potter e a Ordem da Fênix - JK">
+                        <img src="http://books.google.com/books/content?id=9TcQCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Harry Potter e a Ordem da Fênix - JK" class="circle responsive-img">
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-floating green tooltipped" data-position="left" data-tooltip="The Lord of the Rings: The Two Towers - ...">
+                        <img src="http://books.google.com/books/content?id=12e8PJ2T7sQC&printsec=frontcover&img=1&zoom=1&source=gbs_api" alt="The Lord of the Rings: The Two Towers - ..." class="circle responsive-img">
+                    </a>
+                </li>
+            </ul>
+        </div>
+
     </div><!--container-app-->
+
+    
+    <!-- Footer -->
+    <footer class="footer" id="contato">
+        <div class="container">
+            <p>
+                Feito por <strong>Michelle Cristina Gomes</strong>
+            </p>
+            <p>Email: gmichele498@gmail.com</p>
+            <p class="icons-contact">
+                <a href="https://www.linkedin.com/in/michelleGomes85/"
+                    target="_blank"> <i class="fab fa-linkedin"></i>
+                </a> | <a href="https://github.com/michelleGomes85" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </p>
+            <p class="footer-text">Feito para a disciplina WebServices, graduação em Tecnologia em Sistemas para Internet.
+            </p>
+        </div>
+    </footer>
 
     <div id="modal-id" class="modal-error">
       <div id="icon"></div>

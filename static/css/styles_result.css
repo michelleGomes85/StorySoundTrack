@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,12 +10,14 @@ body {
     margin: 0;
     padding: 0;
     color: #e0e0e0;
+    overflow-x: hidden;
 }
 
 .container-app {
     margin: 0 auto;
     height: auto;
     align-items: center;
+    overflow: hidden;
 }
 
 .result_section {
@@ -91,7 +93,7 @@ h2#title-book {
     position: absolute;
     bottom: 0;
     right: 0;
-    background:transparent;
+    background: transparent;
     padding-left: 5px;
 }
 
@@ -234,43 +236,84 @@ h2#title-book {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s ease-out, transform 1s ease-out;
-  }
-  
-  .fade-in.visible {
+}
+
+.fade-in.visible {
     opacity: 1;
     transform: translateY(0);
-  }
+}
 
 #back-to-top {
     display: none;
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
-    z-index: 1000; 
-    background-color: #bf360c;
-    color: white; 
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #e04d01;
+    color: white;
     border: none;
-    border-radius: 50%; 
-    width: 50px; 
-    height: 50px; 
-    font-size: 24px; 
-    cursor: pointer; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 }
-  
+
 #back-to-top:hover {
     background-color: #0056b3;
 }
 
 .chart-container {
     margin-top: 10vh !important;
+    margin-bottom: 10vh !important;
     min-height: 100vh;
+    text-align: center;
+}
+
+.chart-container h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    font-weight: bolder;
 }
 
 #emotionChart {
     width: 800px !important;
     height: auto !important;
+}
+
+.btn-floating {
+    background-color: #e04d01 !important;
+}
+
+input:not([type]):disabled,
+input:not([type])[readonly="readonly"],
+input[type=text]:not(.browser-default):disabled,
+input[type=text]:not(.browser-default)[readonly="readonly"],
+input[type=password]:not(.browser-default):disabled,
+input[type=password]:not(.browser-default)[readonly="readonly"],
+input[type=email]:not(.browser-default):disabled,
+input[type=email]:not(.browser-default)[readonly="readonly"],
+input[type=url]:not(.browser-default):disabled,
+input[type=url]:not(.browser-default)[readonly="readonly"],
+input[type=time]:not(.browser-default):disabled,
+input[type=time]:not(.browser-default)[readonly="readonly"],
+input[type=date]:not(.browser-default):disabled,
+input[type=date]:not(.browser-default)[readonly="readonly"],
+input[type=datetime]:not(.browser-default):disabled,
+input[type=datetime]:not(.browser-default)[readonly="readonly"],
+input[type=datetime-local]:not(.browser-default):disabled,
+input[type=datetime-local]:not(.browser-default)[readonly="readonly"],
+input[type=tel]:not(.browser-default):disabled,
+input[type=tel]:not(.browser-default)[readonly="readonly"],
+input[type=number]:not(.browser-default):disabled,
+input[type=number]:not(.browser-default)[readonly="readonly"],
+input[type=search]:not(.browser-default):disabled,
+input[type=search]:not(.browser-default)[readonly="readonly"],
+textarea.materialize-textarea:disabled,
+textarea.materialize-textarea[readonly="readonly"] {
+    color: #fff;
 }
 
 @media (max-width: 1024px) {

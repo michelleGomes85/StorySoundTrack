@@ -1,3 +1,4 @@
+
 function closeModal() {
   const modal = document.getElementById("modal-id");
   const overlay = document.getElementById("overlay");
@@ -5,6 +6,25 @@ function closeModal() {
   modal.style.display = "none";
   overlay.style.display = "none";
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'));
+  M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+
+  const inputElement = document.getElementById("book-title");
+
+  document.querySelectorAll('.fixed-action-btn .btn-floating').forEach(button => {
+      button.addEventListener('click', function() {
+          
+          const tooltipText = button.getAttribute('data-tooltip');
+          
+          if (inputElement.disabled == false)
+            inputElement.value = tooltipText;
+
+          document.getElementById("searchBtn").click();
+      });
+  });
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   const elems = document.querySelectorAll(".sidenav");
@@ -51,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    inputElement.disabled = true;
+    searchBtn.disabled = true;
     document.getElementById("loading").style.display = "block";
 
     try {
@@ -73,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (error) {
       openModal(error.message);
     } finally {
+      inputElement.disabled = false;
+      searchBtn.disabled = false;
       document.getElementById("loading").style.display = "none";
     }
   };
@@ -122,12 +146,15 @@ function fillDatas(data) {
 document.addEventListener("DOMContentLoaded", function () {
 
   const backToTopButton = document.getElementById("back-to-top");
+  const btnFloating = document.querySelector('.btn-floating');
 
   window.addEventListener("scroll", function () {
     if (window.scrollY > 300) {
       backToTopButton.style.display = "block";
+      btnFloating.style.display = "none";
     } else {
       backToTopButton.style.display = "none";
+      btnFloating.style.display = "block";
     }
   });
 
@@ -142,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function book_datas(data) {
 
   const content_result = document.getElementById('result');
+  const footer = document.querySelector('.footer');
   const top_card = document.querySelector('.top-card');
   const bookImage = document.getElementById("book-image");
   const bookDescription = document.getElementById("book-description");
@@ -153,6 +181,7 @@ function book_datas(data) {
   bookTitle.textContent = data.book.title;
 
   content_result.style.display = 'flex';
+  footer.style.display = 'block';
   content_result.scrollIntoView({ behavior: 'smooth' });
   if (top_card) 
     top_card.classList.add('fade-in');
