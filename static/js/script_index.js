@@ -7,6 +7,7 @@ function closeModal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
   const elems = document.querySelectorAll(".sidenav");
   M.Sidenav.init(elems);
 
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   document.getElementById("searchBtn").onclick = async function (event) {
+
     event.preventDefault();
 
     const input = document.getElementById("book-title").value.trim();
@@ -60,9 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const responseData = await response.json();
 
-      localStorageDatas(responseData);
+      console.log(responseData);
 
-      window.location.href = "/result";
+      //localStorageDatas(responseData);
+
+      //window.location.href = "/result";
     } catch (error) {
       openModal(error.message);
     } finally {

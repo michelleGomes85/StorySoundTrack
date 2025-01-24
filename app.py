@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from services.book_service import get_book_description
 from services.spotify_service import get_spotify_info
-from services.ai_service import analyze_sentiment, generate_playlist
+from services.ai_service import generate_playlist
 from utils.helpers import parse_json_response
 from config.config import ERROR_MESSAGES, FLASK_CONFIG
 
@@ -11,11 +11,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('app_page.html')
 
 @app.route('/result')
 def result():
-    return render_template('result_test.html')
+    return render_template('app_page.html.html')
 
 @app.route('/generate-response', methods=['POST'])
 def generate_response():
@@ -36,14 +36,12 @@ def generate_response():
         book_description = book_info.get("description")
         book_image_url = book_info.get("image_url")
 
-        sentiment_scores = parse_json_response(analyze_sentiment(book_description))
-
-        playlist = parse_json_response(generate_playlist(book_description))
+        playlist = parse_json_response(generate_playlist(book_title_from_api, book_description))
 
         for item in playlist['playlist']:
             artist = item["artist"]
-            music = item["music"]
-            track_url, album_image_url = get_spotify_info(artist, music)
+            song = item["song"]
+            track_url, album_image_url = get_spotify_info(artist, song)
             item["track_url"] = track_url if track_url else "#"
             item["album_image_url"] = album_image_url if album_image_url else ""
 
@@ -52,9 +50,7 @@ def generate_response():
                 "title": book_title_from_api, 
                 "description": book_description,
                 "image_url": book_image_url,
-                "sentiment_scores": sentiment_scores  
             },
-
             "playlist": playlist["playlist"]
         }
         
