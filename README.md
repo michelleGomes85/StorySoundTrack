@@ -2,7 +2,9 @@
 
 Bem-vindo ao **Book Sound Track**! Este projeto combina a magia dos livros com a energia da música, criando playlists personalizadas com base no sentimento e na atmosfera de um livro. Usando APIs do Google Books, Spotify e Google Generative AI, o programa analisa a descrição de um livro, identifica os sentimentos predominantes e sugere músicas que refletem essas emoções.
 
-![Home page](assets/home_page.png)
+<div align="center">
+  <img src="assets/home_page.png" alt="Descrição da imagem">
+</div>
 
 ## ✨ Funcionalidades
 
