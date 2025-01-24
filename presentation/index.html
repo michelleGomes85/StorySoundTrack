@@ -13,8 +13,8 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="/static/images/fav.png" type="image/x-icon">
-    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="shortcut icon" href="imgs/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -25,17 +25,17 @@
             <div class="nav-wrapper">
 
                 <!-- Logo no lado esquerdo -->
-                <a href="/" class="brand-logo">
-                    <img src="/static/images/logo.png" alt="">
+                <a href="#" class="brand-logo">
+                    <img src="imgs/logo.png" alt="">
                     <p>StorySoundTrack</p>
                 </a>
 
                 <!-- Links no centro (desktop) -->
                 <div class="nav-center">
                     <ul>
-                        <li><a href="/"><i class="material-icons">home</i>Home</a></li>
+                        <li><a href="#"><i class="material-icons">home</i>Home</a></li>
                         <li><a href="#funcionalidades"><i class="material-icons">playlist_add</i>Funcionalidades</a></li>
-                        <li><a href="/#contato"><i class="material-icons">email</i>Contato</a></li>
+                        <li><a href="#contato"><i class="material-icons">email</i>Contato</a></li>
                     </ul>
                 </div>
 
@@ -48,9 +48,9 @@
 
         <!-- Navegação para dispositivos móveis -->
         <ul class="sidenav" id="mobile-nav">
-            <li><a href="/"><i class="material-icons">home</i>Home</a></li>
-            <li><a href="/#funcionalidades"><i class="material-icons">playlist_add</i>Funcionalidades</a></li>
-            <li><a href="/#contato"><i class="material-icons">email</i>Contato</a></li>
+            <li><a href="#"><i class="material-icons">home</i>Home</a></li>
+            <li><a href="#funcionalidades"><i class="material-icons">playlist_add</i>Funcionalidades</a></li>
+            <li><a href="#contato"><i class="material-icons">email</i>Contato</a></li>
         </ul>
 
         <!-- Hero Section -->
@@ -61,23 +61,15 @@
                     em <span>emoções</span> sonoras
                 </h1>
                 <p>
-                    Dê uma trilha sonora ao seu livro com StorySoundTrack
+                    Com o <strong>StorySoundTrack</strong>, você descobre a trilha sonora ideal para o seu livro. 
+                    Nosso sistema analisa o clima geral da obra e sugere músicas que combinam perfeitamente 
+                    com a atmosfera da narrativa.
                 </p>
-                <div class="search-container">
-                    <input id="book-title" type="text" placeholder="Digite o título do livro - nome do autor">
-                    <button id="searchBtn">Encontrar Trilha</button>
-                </div>
 
-                <div id="loading">
-                    <i class="material-icons spin">autorenew</i>
-                    <p>Carregando...</p>
-                </div>
+                <a target="_blank" id="repository" href="https://github.com/michelleGomes85/StorySoundTrack">Conheça o Repositório</a>
 
-                <div class="description">
-                    Descubra músicas que capturam os sentimentos do seu livro.
-                </div>
             </div>
-            <img src="/static/images/image_home.png" alt="Imagem de fundo" class="footer-image">
+            <img src="imgs/image_home.png" alt="Imagem de fundo" class="footer-image">
         </div>
         
     </div>
@@ -93,7 +85,7 @@
                         <i class="material-icons">search</i>
                     </div>
                     <h3>1. Escolha o Livro</h3>
-                    <p>Informe o título do livro que deseja transformar em uma playlist. Seja o mais específico possível para obter melhores resultados.</p>
+                    <p>Informe o título do livro e o autor (opcional). Seja o mais específico possível para encontrar o livro correto</p>
                 </div>
 
                 <!-- Passo 2 -->
@@ -102,7 +94,7 @@
                         <i class="material-icons">sentiment_very_satisfied</i>
                     </div>
                     <h3>2. Análise de Sentimentos</h3>
-                    <p>A IA do Gemini analisa o conteúdo do livro coletado via Google Books e identifica os sentimentos principais por meio de palavras-chave.</p>
+                    <p>A IA do Gemini analisa o conteúdo do livro coletado via Google Books e identifica os sentimentos principais.</p>
                 </div>
 
                 <!-- Passo 3 -->
@@ -111,7 +103,7 @@
                         <i class="material-icons">queue_music</i>
                     </div>
                     <h3>3. Playlist Personalizada</h3>
-                    <p>Receba uma playlist com músicas que refletem o clima do livro, com links para o Spotify e uma explicação sobre cada escolha</p>
+                    <p>Receba uma playlist com músicas que refletem o clima do livro, com links para o Spotify e uma explicação sobre cada escolha.</p>
                 </div>
             </div>
         </div>
@@ -123,7 +115,7 @@
                 <!-- Google Books API -->
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <img src="/static/images/google-books-icon.png" alt="Google Books API">
+                        <img src="imgs/google-books-icon.png" alt="Google Books API">
                     </div>
                     <div class="tech-text">
                         <h3>Google Books API</h3>
@@ -134,7 +126,7 @@
                 <!-- Gemini API -->
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <img src="/static/images/gemini-icon.png" alt="Gemini API">
+                        <img src="imgs/google-books-icon.png" alt="Gemini API">
                     </div>
                     <div class="tech-text">
                         <h3>Gemini API</h3>
@@ -145,7 +137,7 @@
                 <!-- Spotify API -->
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <img src="/static/images/spotify-icon.png" alt="Spotify API">
+                        <img src="imgs/spotify-icon.png" alt="Spotify API">
                     </div>
                     <div class="tech-text">
                         <h3>Spotify API</h3>
@@ -175,17 +167,8 @@
 		</div>
 	</footer>
 
-    <div id="modal-id" class="modal-error">
-        <div id="icon"></div>
-        <div class="description" id="error-message"></div> <!-- Elemento de erro -->
-        <button class="fechar" onclick="closeModal()">Fechar</button>
-    </div>
-    
-    <div id="overlay"></div>
-
-    <script src="/static/js/script_index.js"></script>
-
     <!-- Scripts do Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
