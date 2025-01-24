@@ -70,24 +70,26 @@
         </div>
 
         <div id="result" class="result_section">
-          <!-- Card do Topo (Capa do Livro e Descrição) -->
-          <div class="top-card">
-            <img id="book-image" src="" alt="Capa do Livro">
-            <div>
-              <p id="title-book"></p>
-              <p id="book-description"></p>
+          
+            <!-- Card do Topo (Capa do Livro e Descrição) -->
+            <div class="top-card">
+                <img id="book-image" src="" alt="Capa do Livro">
+                <div>
+                    <h2 id="title-book"></h2>
+                    <p id="book-description"></p>
+                    <button class="see-more">Ver mais</button>
+                </div>
             </div>
-          </div>
 
-          <!-- Cards Container -->
-          <div class="cards-container" id="cards-container">
-              <!-- Os cards serão gerados dinamicamente aqui -->
-          </div>
+            <!-- Cards Container -->
+            <div class="cards-container" id="cards-container">
+                <!-- Os cards serão gerados dinamicamente aqui -->
+            </div>
 
-          <!-- Gráfico de Teia -->
-          <div class="chart-container">
-            <canvas id="emotionChart"></canvas>
-          </div>
+            <!-- Gráfico de Teia -->
+            <div class="chart-container">
+                <canvas id="emotionChart"></canvas>
+            </div>
         </div><!--result_section-->
 
     </div><!--container-app-->
@@ -97,10 +99,17 @@
       <div class="description" id="error-message"></div> <!-- Elemento de erro -->
       <button class="fechar" onclick="closeModal()">Fechar</button>
     </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-description"></p>
+        </div>
+    </div>
   
   <div id="overlay"></div>
 
-  <button id="back-to-top" title="Voltar ao topo">↑</button>
+  <button id="back-to-top" title="Voltar ao topo"><i class="material-icons">arrow_upward</i></button>
 
     <!-- Scripts do Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

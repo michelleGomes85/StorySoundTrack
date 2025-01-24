@@ -12,17 +12,21 @@ SPOTIPY_CLIENT_SECRET = os.getenv("SPOTIPY_CLIENT_SECRET")
 
 PLAYLIST_PROMPT = """
 Pegue o seguinte livro {book_title}: {book_description}. 
-Divida a obra em 6 sentimentos predominantes e escolha uma música que reflita cada sentimento e tenha grande probabilidade de estar no Spotify.
+Divida a obra em 6 emoções predominantes e escolha uma música que reflita cada emoção e tenha grande probabilidade de estar no Spotify.
 
 Forneça como resposta um JSON estruturado assim:
 Nome do JSON que envolve tudo playlist:
 
-    "emotion": "Sentimento predominante",
-    "color": "Cor que reflete o sentimento, em tons escuros e adequados ao sentimento. Use cores como vinho (#800000) para paixão, azul marinho (#000080) para tristeza, verde-escuro (#006400) para esperança, etc. Evite cores claras ou pastéis."
-    "song": "Música que reflete o sentimento escolhido (com alta probabilidade de estar no Spotify)",
+    "emotion": "Emoção predominante",
+    "color": "Uma cor distinta que simboliza a emoção, escolhida para contrastar bem com um fundo preto. Escolha cores que se destaquem (ex: vermelho para raiva, azul para tristeza, verde para esperança, etc.), em hexadecimal",
+    "song": "Música que reflete a emoção escolhida (com alta probabilidade de estar no Spotify)",
     "artist": "Autor da música",
-    "description": "Descrição breve do porquê do sentimento e da escolha da música, citando situações do livro",
-    "intensity": "Nota para a intensidade do sentimento no livro, de 1 a 5"
+    "description": "Descrição breve do porquê da emoção e da escolha da música, citando situações do livro",
+    "intensity": "Nota para a intensidade da emoção no livro, de 1 a 5"
+
+Regras:
+    -> Responda em português
+    -> Escolha músicas váriaveis, se estiver de acordo com o contexto (nacional ou internacional)
 """
 
 # Mensagens de erro
