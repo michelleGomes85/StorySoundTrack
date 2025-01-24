@@ -1,5 +1,7 @@
 # 📚🎵 Book Sound Track
 
+[![Apresentação](https://img.shields.io/badge/Apresentação-%23FF8C01.svg)](https://michellegomes85.github.io/PeerTalk/)
+
 Bem-vindo ao **Book Sound Track**! Este projeto combina a magia dos livros com a energia da música, criando playlists personalizadas com base no sentimento e na atmosfera de um livro. Usando APIs do Google Books, Spotify e Google Generative AI, o programa analisa a descrição de um livro, identifica os sentimentos predominantes e sugere músicas que refletem essas emoções.
 
 <div align="center">
@@ -93,8 +95,6 @@ python app.py
 ### Página Inicial
 
 ![Home page](assets/home_page_response.png)
-
-![example](assets/examples.png)
 
 ### Página Resposta
 
