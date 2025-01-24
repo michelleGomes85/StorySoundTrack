@@ -2,6 +2,8 @@
 
 Bem-vindo ao **Book Sound Track**! Este projeto combina a magia dos livros com a energia da música, criando playlists personalizadas com base no sentimento e na atmosfera de um livro. Usando APIs do Google Books, Spotify e Google Generative AI, o programa analisa a descrição de um livro, identifica os sentimentos predominantes e sugere músicas que refletem essas emoções.
 
+![Home page](assets/home_page.png)
+
 ## ✨ Funcionalidades
 
 - **Análise de Sentimentos**: O programa analisa a descrição de um livro e identifica sentimentos como Amor, Calma, Energia, Felicidade, Raiva e Tristeza.
@@ -88,13 +90,17 @@ python app.py
 
 ### Página Inicial
 
-![Home page](assets/home_page.png)
+![Home page](assets/home_page_response.png)
+
+![example](assets/examples.png)
 
 ### Página Resposta
 
 **Descrição Livro**
 
 ![Descrição Livro](assets/book_description.png)
+
+![Descrição Livro](assets/description.png)
 
 **Playlist**
 
