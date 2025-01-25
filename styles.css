@@ -350,8 +350,15 @@ a#repository:hover {
 /* Responsividade */
 @media (max-width: 768px) {
 
+    .nav-wrapper {
+        padding: 0 10px;
+    }
+    .video {
+        width: 90vw;
+    }
+
     .hero h1 {
-        font-size: 3.2rem;
+        font-size: 2.9rem;
     }
 
     .hero p{
