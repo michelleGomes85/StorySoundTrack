@@ -89,6 +89,9 @@ nav .brand-logo img {
 
 .hero-description {
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero h1 {
@@ -312,8 +315,45 @@ a#repository:hover {
     margin-top: 10vh;
 }
 
+.video-container-my {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0; 
+    transform: translateY(50px); 
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.video-container-my.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.video {    
+    width: 70vw; 
+    height: auto;
+    border: none;
+    background: transparent; 
+    clip-path: inset(0px 12px 12px 12px);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
+
+    .hero h1 {
+        font-size: 3.3rem;
+    }
+
+    .hero p{
+        width: 90vw;
+    }
+
     .tech-flow {
         flex-direction: column;
         gap: 30px;
@@ -328,10 +368,7 @@ a#repository:hover {
         width: 80px;
         height: 80px;
     }
-}
 
-/* Responsividade */
-@media (max-width: 768px) {
     .steps-container {
         flex-direction: column;
         align-items: center;
