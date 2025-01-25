@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const input = inputElement.value.trim();
 
     if (!input) {
-      openModal("Por favor, insira o título do livro seguido de ' - ' e o nome do autor. Caso não saiba o nome do autor, basta escrever apenas o nome do livro, seguido de ' - ...'. ");
+      openModal("Por favor, insira o título do livro seguido de ' - ' e o nome do autor. Caso não saiba o nome do autor, basta escrever apenas o nome do livro, seguido de ' - ...'. Exemplos ao lado, ao passar o mouse na ?");
       inputElement.value = "";
       inputElement.focus();
       return;
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const separatorIndex = input.lastIndexOf(" - ");
     if (separatorIndex === -1) {
-      openModal("Por favor, insira o título do livro seguido de ' - ' e o nome do autor. Caso não saiba o nome do autor, basta escrever apenas o nome do livro, seguido de ' - ...'. ");
+      openModal("Por favor, insira o título do livro seguido de ' - ' e o nome do autor. Caso não saiba o nome do autor, basta escrever apenas o nome do livro, seguido de ' - ...'. Exemplos ao lado, ao passar o mouse na ?");
       inputElement.value = "";
       inputElement.focus();
       return;
