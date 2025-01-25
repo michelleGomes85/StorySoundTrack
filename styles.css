@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #071828; 
+}
+
 .container-app {
     display: flex;
     flex-direction: column;
@@ -310,6 +314,34 @@ a#repository:hover {
 
 .sidenav li:first-child {
     margin-top: 10vh;
+}
+
+.video-container-my {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0; 
+    transform: translateY(50px); 
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.video-container-my.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.video {    
+    width: 70vw; 
+    height: auto;
+    border: none;
+    background: transparent; 
+    clip-path: inset(0px 12px 12px 12px);
 }
 
 /* Responsividade */
