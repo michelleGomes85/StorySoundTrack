@@ -346,6 +346,15 @@ a#repository:hover {
 
 /* Responsividade */
 @media (max-width: 768px) {
+
+    .hero h1 {
+        font-size: 3.2rem;
+    }
+
+    .hero p{
+        width: 90vw;
+    }
+
     .tech-flow {
         flex-direction: column;
         gap: 30px;
@@ -360,10 +369,7 @@ a#repository:hover {
         width: 80px;
         height: 80px;
     }
-}
 
-/* Responsividade */
-@media (max-width: 768px) {
     .steps-container {
         flex-direction: column;
         align-items: center;
