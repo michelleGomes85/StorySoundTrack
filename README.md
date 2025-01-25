@@ -12,7 +12,7 @@ Bem-vindo ao **Book Sound Track**! Este projeto combina a magia dos livros com a
 
 - **Análise de Sentimentos**: O programa analisa a descrição de um livro e identifica sentimentos como Amor, Calma, Energia, Felicidade, Raiva e Tristeza.
 
-*- **Playlist Personalizada**: Com base nos sentimentos identificados, o programa gera uma playlist de 6 músicas que combinam com o clima do livro.
+- **Playlist Personalizada**: Com base nos sentimentos identificados, o programa gera uma playlist de 6 músicas que combinam com o clima do livro.
 
 - Integração com APIs:
    
@@ -84,11 +84,11 @@ python app.py
 
 4. Na página de resultados, você verá:
 
-  - A descrição do livro.
+    - A descrição do livro.
 
-  - Uma análise dos sentimentos predominantes.
+    - Uma análise dos sentimentos predominantes.
 
-  - Uma playlist de 6 músicas, cada uma com um link para o Spotify.
+    - Uma playlist de 6 músicas, cada uma com um link para o Spotify.
 
 ## 🖼️ Exemplos de Uso
 
@@ -108,7 +108,7 @@ python app.py
 
 ![Playlist](assets/playlist.png)
 
-**Analise de Sentimentos**
+**Analise das Emoções**
 
 ![Analise](assets/analise.png)
 
@@ -132,7 +132,7 @@ python app.py
 
   3. Obtenha o Client ID e Client Secret.
 
-  4.Adicione-os ao arquivo .env.
+  4. Adicione-os ao arquivo .env.
 
 ### Google Generative AI
 
@@ -142,13 +142,24 @@ python app.py
 
   3. Adicione a chave ao arquivo .env.
 
-🛠️ Estrutura do Projeto
+## 🛠️ Estrutura do Projeto
 
  ```sh
 StorySoundTrack/
-├── assets
+├── assets/
 ├── config/
 │   └── config.py
+├── presentation/
+│   └── imgs/
+│       ├── gemini-icon.png
+│       ├── google-books-icon.png
+│       ├── spotify-icon.png
+│       ├── fav.png
+│       ├── image_home.png
+│       ├── logo.png
+│   └── index.html
+│   └── script.js
+│   └── styles.css
 ├── services/
 │   └── ai_service.py
 │   ├── book_service.py
@@ -158,18 +169,13 @@ StorySoundTrack/
 │   │   └── styles_result.css
 │   │   └── styles.css
 │   ├── js/
-│   │   └── script_index.js
 │   │   └── script_result.js
 │   └── images/
 │       ├── fav.png
-│       ├── gemini-icon.png
-│       ├── google-books-icon.png
 │       ├── image_home.png
 │       ├── logo.png
-│       ├── spotify-icon.png
 ├── templates/
-│   ├── index.html
-│   └── result.html
+│   ├── app_page.html
 ├── utils/
 │   └── helpers.py
 ├── app.py
